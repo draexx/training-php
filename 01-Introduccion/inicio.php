@@ -25,6 +25,10 @@ if ($miVariable == "hello world"){
 
 foreach ($array as $key =>$value){
     echo $key."=>".$value."\n";
+    echo "<br/>";
 }
+
+$cons = array();
+$cons = [1,2,3,4,5];
 
 ?>
