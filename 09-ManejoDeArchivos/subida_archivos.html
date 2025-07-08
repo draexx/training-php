@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Subida de Archivos en PHP</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; line-height: 1.6; }
+        .container { max-width: 600px; margin: auto; background: #f4f4f4; padding: 20px; border-radius: 5px; }
+        h1 { color: #333; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group input[type="file"] { padding: 8px; border: 1px solid #ccc; border-radius: 4px; width: 100%; box-sizing: border-box; }
+        .form-group input[type="text"] { padding: 8px; border: 1px solid #ccc; border-radius: 4px; width: calc(100% - 22px); }
+        .form-group button { padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .form-group button:hover { background-color: #0056b3; }
+        .message { padding: 10px; margin-top: 15px; border-radius: 4px; }
+        .message.success { background-color: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .message.error { background-color: #f8d7da; border-color: #f5c6cb; color: #721c24; }
+        .file-info { margin-top:10px; font-size:0.9em; color:#555; }
+        .preview img { max-width: 200px; max-height: 200px; margin-top: 10px; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Subir un Archivo al Servidor</h1>
+
+    <!--
+        IMPORTANTE para la subida de archivos:
+        1. El formulario DEBE usar method="POST".
+        2. El formulario DEBE tener el atributo enctype="multipart/form-data".
+           Esto indica que el formulario enviará datos binarios (el archivo).
+    -->
+    <form action="procesar_subida.php" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="archivo_usuario">Selecciona un archivo (imagen o PDF, máx 2MB):</label>
+            <!-- El input type="file" crea el botón para seleccionar archivo -->
+            <!-- El atributo 'name' ("archivo_usuario" en este caso) será la clave en el array $_FILES en PHP -->
+            <input type="file" id="archivo_usuario" name="archivo_usuario" required>
+            <p class="file-info">Tipos permitidos: JPG, JPEG, PNG, GIF, PDF. Tamaño máximo: 2MB.</p>
+        </div>
+
+        <div class="form-group">
+            <label for="descripcion_archivo">Descripción del archivo (opcional):</label>
+            <input type="text" id="descripcion_archivo" name="descripcion_archivo" placeholder="Ej: Factura Enero">
+        </div>
+
+        <!-- Campo oculto para limitar el tamaño máximo del archivo (MAX_FILE_SIZE) -->
+        <!-- DEBE preceder al input de tipo file. Es una directiva para el navegador, pero PHP también tiene sus límites. -->
+        <!-- Valor en bytes (2MB = 2 * 1024 * 1024 = 2097152 bytes) -->
+        <input type="hidden" name="MAX_FILE_SIZE" value="2097152">
+
+        <div class="form-group">
+            <button type="submit" name="submit_file">Subir Archivo</button>
+        </div>
+    </form>
+
+    <hr>
+    <p>Este formulario enviará el archivo seleccionado y la descripción al script <code>procesar_subida.php</code>.</p>
+    <p>Asegúrate de que el directorio de subidas (ej. 'uploads/') exista y tenga permisos de escritura para el servidor web.</p>
+    <p>También revisa las directivas <code>upload_max_filesize</code> y <code>post_max_size</code> en tu archivo <code>php.ini</code>, ya que estas también limitan el tamaño de los archivos subidos.</p>
+
+</div>
+</body>
+</html>

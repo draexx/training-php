@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-T">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Ejemplo PHP</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; padding: 20px; }
+        .container { max-width: 600px; margin: auto; background: #f4f4f4; padding: 20px; border-radius: 5px; }
+        label { display: block; margin-bottom: 5px; }
+        input[type="text"], input[type="email"], input[type="password"], textarea, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        input[type="radio"], input[type="checkbox"] { margin-right: 5px; }
+        .radio-group label, .checkbox-group label { font-weight: normal; }
+        .error { color: red; font-size: 0.9em; margin-bottom:10px; }
+        .success { color: green; font-size: 0.9em; margin-bottom:10px; }
+        button { background-color: #5cb85c; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #4cae4c; }
+        .output { margin-top: 20px; padding:15px; border: 1px solid #ddd; background: #fff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Formulario de Contacto</h1>
+        <p>Este formulario envía datos al script <code>procesar_formulario.php</code> usando el método POST.</p>
+
+        <!-- El action apunta al script PHP que procesará los datos -->
+        <!-- method="POST" es más seguro para enviar datos sensibles y para datos más largos -->
+        <form action="procesar_formulario.php" method="POST" novalidate>
+            <div>
+                <label for="nombre">Nombre Completo:</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ej: Ana Pérez" value="">
+            </div>
+
+            <div>
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" placeholder="Ej: ana.perez@example.com" value="">
+            </div>
+
+            <div>
+                <label for="asunto">Asunto:</label>
+                <input type="text" id="asunto" name="asunto" value="">
+            </div>
+
+            <div>
+                <label for="contrasena">Contraseña (ejemplo):</label>
+                <input type="password" id="contrasena" name="contrasena">
+            </div>
+
+            <div>
+                <label>Género:</label>
+                <div class="radio-group">
+                    <input type="radio" id="genero_masculino" name="genero" value="masculino">
+                    <label for="genero_masculino">Masculino</label>
+                    <input type="radio" id="genero_femenino" name="genero" value="femenino">
+                    <label for="genero_femenino">Femenino</label>
+                    <input type="radio" id="genero_otro" name="genero" value="otro">
+                    <label for="genero_otro">Otro</label>
+                </div>
+            </div>
+
+            <div>
+                <label for="pais">País:</label>
+                <select id="pais" name="pais">
+                    <option value="">-- Selecciona un país --</option>
+                    <option value="ES">España</option>
+                    <option value="MX">México</option>
+                    <option value="AR">Argentina</option>
+                    <option value="CO">Colombia</option>
+                    <option value="US">Estados Unidos</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Intereses:</label>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="interes_deporte" name="intereses[]" value="deporte">
+                    <label for="interes_deporte">Deporte</label><br>
+                    <input type="checkbox" id="interes_tecnologia" name="intereses[]" value="tecnologia">
+                    <label for="interes_tecnologia">Tecnología</label><br>
+                    <input type="checkbox" id="interes_arte" name="intereses[]" value="arte">
+                    <label for="interes_arte">Arte</label><br>
+                    <input type="checkbox" id="interes_viajes" name="intereses[]" value="viajes">
+                    <label for="interes_viajes">Viajes</label>
+                </div>
+            </div>
+
+            <div>
+                <label for="mensaje">Mensaje:</label>
+                <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..."></textarea>
+            </div>
+
+            <div>
+                <input type="checkbox" id="terminos" name="terminos" value="aceptado">
+                <label for="terminos" style="display:inline;">Acepto los términos y condiciones</label>
+            </div>
+
+            <!-- Campo oculto de ejemplo -->
+            <input type="hidden" name="id_formulario" value="contacto_v1">
+
+            <br>
+            <button type="submit" name="enviar">Enviar Mensaje</button>
+            <button type="reset">Limpiar Formulario</button>
+        </form>
+
+        <hr>
+        <h2>Formulario con método GET</h2>
+        <p>Este formulario envía datos al script <code>procesar_formulario.php</code> usando el método GET. Los datos serán visibles en la URL.</p>
+        <form action="procesar_formulario.php" method="GET">
+            <div>
+                <label for="buscar">Buscar:</label>
+                <input type="text" id="buscar" name="q" placeholder="Término de búsqueda">
+            </div>
+            <div>
+                <label for="categoria">Categoría:</label>
+                <select id="categoria" name="cat">
+                    <option value="todos">Todos</option>
+                    <option value="libros">Libros</option>
+                    <option value="electronica">Electrónica</option>
+                </select>
+            </div>
+            <button type="submit">Buscar con GET</button>
+        </form>
+
+    </div>
+</body>
+</html>
